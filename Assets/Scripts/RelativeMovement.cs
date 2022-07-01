@@ -26,6 +26,9 @@ public class RelativeMovement : MonoBehaviour {
 	private CharacterController charController;
 	private Animator animator;
 
+	// physics force for pushing objects
+	public float pushForce = 3.0f;
+
 	// Use this for initialization
 	void Start() {
 		vertSpeed = minFall;
@@ -103,5 +106,13 @@ public class RelativeMovement : MonoBehaviour {
 	// store collision to use in Update
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		contact = hit;
+
+		// check if the collided object has a Rigidbody to receive physics forces
+		Rigidbody body = hit.collider.attachedRigidbody;
+		if (body != null && !body.isKinematic)
+        {
+			// apply velocity to the physics body in the direction of move by player
+			body.velocity = hit.moveDirection * pushForce;
+        }
 	}
 }
