@@ -26,4 +26,25 @@ public class DoorOpenDevice : MonoBehaviour
         // toggle the boolean
         open = !open;
     }
+    public void Activate()
+    {
+        // open the door only if it isn't already open
+        if (!open)
+        {
+            Vector3 pos = transform.position + dPos;
+            transform.position = pos;
+            open = true;
+        }
+    }
+
+    public void Deactivate()
+    {
+        // close the door only if it is already open
+        if (open)
+        {
+            Vector3 pos = transform.position - dPos;
+            transform.position = pos;
+            open = false;
+        }
+    }
 }
