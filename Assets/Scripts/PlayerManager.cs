@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// inherit from the MonoBehavior class and implement the IGameManager interface
+// in other words: gain all functionality of MonoBehavior while also needing to implement
+// structure imposed by IGameManager (one property and one method)
 public class PlayerManager : MonoBehaviour, IGameManager
 {
     // status can be read from anywhere (getter is public), but set only within this script (the setter is private)
