@@ -9,6 +9,7 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     // static properties that other code uses to access managers
+    // these enable other scripts to use syntax like Managers.Player or Managers.Inventory to access various modules.
     public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
 

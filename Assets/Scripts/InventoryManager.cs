@@ -12,7 +12,9 @@ public class InventoryManager : MonoBehaviour, IGameManager
         // any long-running startup tasks go here
         Debug.Log("Inventory manager starting...");        
         
-        // for long-running tasks, use status "Initialized" instead, once finished, then "Started"
+        // for long-running tasks, use status "Initialized" instead:
+        
+        // once finished, then "Started"
         status = ManagerStatus.Started;
     }
 }
