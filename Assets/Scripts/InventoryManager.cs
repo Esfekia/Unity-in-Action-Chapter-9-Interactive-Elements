@@ -7,14 +7,15 @@ public class InventoryManager : MonoBehaviour, IGameManager
     // property can be read from anywhere but set only within this script
     public ManagerStatus status { get; private set; }
 
-    private List<string> items;
+    // dictionary is declared with two types: the key and the value
+    private Dictionary<string, int> items;
     public void Startup()
     {
         // any long-running startup tasks go here
         Debug.Log("Inventory manager starting...");
 
-        // initialize the empty item list
-        items = new List<string>();
+        // initialize the empty item dictionary
+        items = new Dictionary<string, int>();
 
         // for long-running tasks, use status "Initialized" instead:
 
@@ -26,9 +27,9 @@ public class InventoryManager : MonoBehaviour, IGameManager
     public void DisplayItems()
     {
         string itemDisplay = "Items: ";
-        foreach(string item in items)
+        foreach(KeyValuePair<string, int> item in items)
         {
-            itemDisplay += item + " ";
+            itemDisplay += item.Key + " (" + item.Value + ") ";
         }
         Debug.Log(itemDisplay);
     }
@@ -36,8 +37,16 @@ public class InventoryManager : MonoBehaviour, IGameManager
     // other scripts can't manipulate the item list directly but can call this.
     public void AddItem(string name)
     {
-        items.Add(name);
-
+        // check for existing entries before entering new data
+        if (items.ContainsKey(name))
+        {
+            items[name] += 1;
+        }
+        else
+        {
+            items[name] = 1;
+        }
+        
         DisplayItems();
     }
 }
