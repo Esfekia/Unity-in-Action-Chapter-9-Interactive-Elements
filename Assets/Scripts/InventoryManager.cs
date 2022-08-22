@@ -49,4 +49,21 @@ public class InventoryManager : MonoBehaviour, IGameManager
         
         DisplayItems();
     }
+
+    // method to return a list of all the dictionary keys
+    public List<string> GetItemList()
+    {
+        List<string> list = new List<string>(items.Keys);
+        return list;
+    }
+
+    // method that returns how many of that item are in inventory
+    public int GetItemCount(string name)
+    {
+        if (items.ContainsKey(name))
+        {
+            return items[name];
+        }
+        return 0;
+    }
 }
