@@ -28,5 +28,27 @@ public class BasicUI : MonoBehaviour
             // shift sideways each time through the loop.
             posX += width + buffer;
         }
+        string equipped = Managers.Inventory.equippedItem;
+
+        // display the currently equipped item
+        if (equipped != null)
+        {
+            posX = Screen.width - (width + buffer);
+            Texture2D image = Resources.Load($"Icons/{equipped}") as Texture2D;
+            GUI.Box(new Rect(posX, posY, width, height), new GUIContent("Equipped", image));
+        }
+        posX = 10;
+        posY += height + buffer;
+
+        // loop through all items to make buttons
+        foreach (string item in itemList)
+        {
+            // run the contained code if clicked:
+            if (GUI.Button(new Rect(posX, posY, width, height), $"Equip {item}"))
+            {
+                Managers.Inventory.EquipItem(item);
+            }
+            posX += width + buffer;
+        }
     }
 }

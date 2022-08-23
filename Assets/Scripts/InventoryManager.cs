@@ -7,6 +7,8 @@ public class InventoryManager : MonoBehaviour, IGameManager
     // property can be read from anywhere but set only within this script
     public ManagerStatus status { get; private set; }
 
+    public string equippedItem { get; private set; }
+
     // dictionary is declared with two types: the key and the value
     private Dictionary<string, int> items;
     public void Startup()
@@ -65,5 +67,20 @@ public class InventoryManager : MonoBehaviour, IGameManager
             return items[name];
         }
         return 0;
+    }
+
+    public bool EquipItem(string name)
+    {
+        // check that inventory has the item and that the item isn't already equipped
+        if (items.ContainsKey(name) && equippedItem != name)
+        {
+            equippedItem = name;
+            Debug.Log($"Equipped {name}");
+            return true;
+        }
+
+        equippedItem = null;
+        Debug.Log("Unequipped");
+        return false;
     }
 }
